@@ -19,11 +19,11 @@ class library:
 
         #чтение из файлов и перевод в списки строк
         with open('books.txt', 'r', encoding='utf-8-sig')as f:              #чтение из файла и создание списка типа [книга;автор]
-            book_author = f.read().splitlines()
+            book_author = f.read().split('\n')
         with open("booksinfo.txt", "r", encoding=("utf-8-sig")) as f:       #чтение из файла и создание списка типа [книга;инфо]
-            review_list = f.read().splitlines()
+            review_list = f.read().split('\n')
         with open("bookbuy.txt", "r", encoding=("utf-8-sig")) as f:         #чтение из файла и создание списка типа [книга;link]
-            buy_list = f.read().splitlines()
+            buy_list = f.read().split('\n')
             
 
         #разбивка 
@@ -56,4 +56,4 @@ class library:
             return 'Нет такой книги'
 
 newLib=library()
-newLib.info("Математика_для_тех,_кто_не_открывал_учебник")  #пример вывода info
+newLib.info("Математика для тех, кто не открывал учебник")  #пример вывода info
