@@ -46,14 +46,56 @@ class library:
                     self.BOOK.append(book)
                     self.AUTHOR.append(author)
                     
-    def info (self,name):                                               #принимает значение(в данном случае название книги)
-            for k in range(len(self.BOOK)):                             # k- номер строки в списке с совпадением, если переделать например на self.AUTHOR можно организовать поиск по автору
-                if self.BOOK[k] == name:
-                    self.book = print('названия\n', self.BOOK[k])       #вывод значения списка по типу НазваниеСписка[номер строки в списке]
-                    self.author=print('авторы\n', self.AUTHOR[k])
-                    self.review=print('обзор\n', self.REVIEW[k])
-                    self.buy = print('ссылка на книгу\n', self.BUY[k])
-            return 'Нет такой книги'
+    def add_book(self):
+        addBook = str(input("Введите название новой книги: "))
+        addAuthor = str(input("Введите автора новой книги: "))
+        addReview = str(input("Введите описание новой книги: "))
+        addBuy = str(input("Введите ссылку на покупку новой книги: "))
+        self.BOOK.append(addBook)
+        self.REVIEW.append(addReview)
+        self.BUY.append(addBuy)
+        self.AUTHOR.append(addAuthor)
+        with open('bookbuy.txt', 'a', encoding=('utf-8-sig')) as s:
+            s.write('\n')
+            s.write(addBook)
+            s.write(';')
+            s.write(addBuy)
+        with open('books.txt', 'a', encoding=('utf-8-sig')) as s:
+            s.write('\n')
+            s.write(str(addBook))
+            s.write(';')
+            s.write(str(addAuthor))
+        with open('booksinfo.txt', 'a', encoding=('utf-8-sig')) as s:
+            s.write('\n')
+            s.write(str(addBook))
+            s.write(';')
+            s.write(str(addReview))
+                    
+    def infoBook (self,name):                                               #принимает значение(в данном случае название книги)
+        for k in range(len(self.BOOK)):                             # k- номер строки в списке с совпадением, если переделать например на self.AUTHOR можно организовать поиск по автору
+            if self.BOOK[k] == name:
+                    self.book = print('\nназвание\n', self.BOOK[k])       #вывод значения списка по типу НазваниеСписка[номер строки в списке]
+                    self.author=print('\nавтор\n', self.AUTHOR[k])
+                    self.review=print('\nобзор\n', self.REVIEW[k])
+                    self.buy = print('\nссылка на книгу\n', self.BUY[k])
+            if name not in self.BOOK:
+                print('\nК сожилению такой книги пока что нет в нашей библиотеке\n')
 
-newLib=library()
-newLib.info("Математика для тех, кто не открывал учебник")  #пример вывода info
+    def infoAuthor(self, name):
+        for k in range(len(self.AUTHOR)):
+            if self.AUTHOR[k] == name:
+                    self.book = print('\nназвание\n', self.BOOK[k])
+                    self.author = print('\nавтор\n', self.AUTHOR[k])
+                    self.review = print('\nобзор\n', self.REVIEW[k])
+                    self.buy = print('\nссылка на книгу\n', self.BUY[k])
+            if name not in self.AUTHOR:
+                print('\nК сожилению автора с таким именем пока что нет в нашей библиотеке\n')
+    
+    def book_by_letter(self,letter):
+        print("\nНайденные совпадения\n")
+        print("\n".join(s for s in self.BOOK if letter.lower() in s.lower()))
+    
+    def author_by_letter(self, letter):
+        print("\nНайденные совпадения\n")
+        print("\n".join(s for s in self.AUTHOR if letter.lower() in s.lower()))
+
